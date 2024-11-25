@@ -33,20 +33,25 @@ jobs:
               with:
                   terraform_version: 1.9.7
 
-            # Step 4: Run Checkov for Terraform static analysis
+            # Step 4: Install Checkov
+            - name: Install Checkov
+              run: |
+                  pip install checkov
+
+            # Step 5: Run Checkov for Terraform static analysis
             - name: Run Checkov to Scan Terraform Code
               run: |
                   checkov -d . --skip-check CKV2_AWS_5,CKV2_AWS_19,CKV2_AWS_12
 
-            # Step 5: Terraform Init
+            # Step 6: Terraform Init
             - name: Terraform Init
               run: terraform init
 
-            # Step 6: Terraform Plan
+            # Step 7: Terraform Plan
             - name: Terraform Plan
               run: terraform plan
 
-            # Step 7: Terraform Apply
+            # Step 8: Terraform Apply
             - name: Terraform Apply
               if: github.event_name == 'push'
               run: terraform apply -auto-approve
