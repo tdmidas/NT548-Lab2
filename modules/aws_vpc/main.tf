@@ -17,19 +17,7 @@ resource "aws_vpc" "vpc" {
   }
   
 }
-resource "aws_flow_log" "vpc_flow_log" {
-  vpc_id = aws_vpc.vpc.id
 
-  log_destination_type = "cloud-watch-logs" # or "s3" if you prefer S3
-  log_group_name       = "/aws/vpc/flow-logs/${local.project_name}-vpc"
-  traffic_type         = "ALL" # Choose from "ALL", "ACCEPT", or "REJECT"
-
-  tags = {
-    Name = "${local.project_name}-vpc-flow-log"
-  }
-
-  
-}
 
 
 resource "aws_subnet" "public_subnet" {
