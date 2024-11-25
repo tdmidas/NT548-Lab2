@@ -28,8 +28,7 @@ resource "aws_flow_log" "vpc_flow_log" {
     Name = "${local.project_name}-vpc-flow-log"
   }
 
-  # Ensure this IAM role exists if using CloudWatch Logs
-  iam_role_arn = aws_iam_role.vpc_flow_log_role.arn
+  
 }
 
 
